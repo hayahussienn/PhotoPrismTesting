@@ -12,7 +12,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SearchingTest {
+public class SearchingTest
+{
     WebDriver driver;
     private static final String baseURL = "http://localhost:2342/library/browse";
     private LoginPage login;
@@ -26,15 +27,11 @@ public class SearchingTest {
         homePage = login.signInAsValidUser("admin", "yourpassword"); // Navigate to home page after login
     }
 
-    @Test
-    public void testCountKeywordCatPhotos() {
-        List<WebElement> photoList = homePage.getSearchActions().getListofPhotosByKeyWord("cat");
-        assertEquals(photoList.size(), 2);
-    }
 
     @Test
-    public void testResultOfSearchByCatKeyWord() {
+    public void testSearchByCatKeyWord() {
         List<WebElement> photoList = homePage.getSearchActions().getListofPhotosByKeyWord("cat");
+        assertEquals(photoList.size(), 2);
         List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
         String idOfPhoto1 = sortedPhotoList.get(0);
@@ -43,18 +40,13 @@ public class SearchingTest {
         assertEquals(idOfPhoto1, "psosjn9t5iu3hpdt");
         assertEquals(idOfPhoto2, "psosjpp23nehtzzg");
 
-
     }
 
+
     @Test
-    public void testCountResultOf2Keywords() {
+    public void testSearchBy2KeyWords() {
         List<WebElement> photoList = homePage.getSearchActions().getListofPhotosBySearch2KeyWord("car dog");
         assertEquals(photoList.size(), 2);
-    }
-
-    @Test
-    public void testResultFor2KeywordSearch() {
-        List<WebElement> photoList = homePage.getSearchActions().getListofPhotosByKeyWord("car dog");
         List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
         String idOfPhoto1 = sortedPhotoList.get(0);
@@ -65,14 +57,16 @@ public class SearchingTest {
     }
 
     @Test
-    public void testSearchWithInvalidKeyWord() {
+    public void testSearchByInvalidKeyWord() {
         String returnedMessage = homePage.getSearchActions().searchWithInvalidKeyWord("invalidKeyword123");
         String expectedMessage = "No pictures found";
         assertEquals(returnedMessage, expectedMessage);
     }
 
+
     @AfterEach
     public void tearDown() {
         driver.quit();
     }
+
 }
