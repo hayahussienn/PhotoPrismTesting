@@ -5,10 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.time.Duration;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginTest
@@ -16,7 +12,6 @@ public class LoginTest
     WebDriver driver;
     private static final String baseURL = "http://localhost:2342/library/browse";
     private LoginPage login;
-    private HomePage homePage;
 
 
     @BeforeEach
@@ -25,7 +20,6 @@ public class LoginTest
         driver = new ChromeDriver();
         driver.get(baseURL);
         login = new LoginPage(driver);
-        homePage=new HomePage(driver);
 
     }
 

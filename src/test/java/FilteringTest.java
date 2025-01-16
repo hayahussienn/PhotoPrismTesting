@@ -19,6 +19,31 @@ public class FilteringTest
     private LoginPage login;
     private HomePage homePage;
 
+
+    // Photo IDs as constants
+    private static final String ID_ISRAEL_PHOTO1 = "psosj2h801jykn1a";
+    private static final String ID_ISRAEL_PHOTO2 = "psosj3v4cr54jghq";
+    private static final String ID_ISRAEL_PHOTO3 = "psosjpp23nehtzzg";
+
+    private static final String ID_2018_PHOTO1 = "psot5cs97506oo7c";
+    private static final String ID_2018_PHOTO2 = "psot5vm3qxk3f5a1";
+
+    private static final String ID_ANIMAL_PHOTO1 ="psosjn9t5iu3hpdt";
+    private static final String ID_ANIMAL_PHOTO2 = "psosjpp23nehtzzg";
+    private static final String ID_ANIMAL_PHOTO3 = "psosoy75flwtf358";
+
+    private static final String ID_RED_PHOTO = "psospby5uudwhqz2";
+
+    private static final String ID_OCTOBER_PHOTO1 = "psosuc52rcs4fwep";
+    private static final String ID_OCTOBER_PHOTO2 = "psot5vm3qxk3f5a1";
+
+    private static final String ID_GERMANY2018_PHOTO1 = "psot5cs97506oo7c";
+    private static final String ID_GERMANY2018_PHOTO2 ="psot5vm3qxk3f5a1";
+
+
+
+
+
     @BeforeEach
     public void setup()
     {
@@ -40,9 +65,9 @@ public class FilteringTest
         String idOfPhoto2 = sortedPhotoList.get(1);
         String idOfPhoto3 = sortedPhotoList.get(2);
 
-        assertEquals(idOfPhoto1, "psosj2h801jykn1a");
-        assertEquals(idOfPhoto2, "psosj3v4cr54jghq");
-        assertEquals(idOfPhoto3, "psosjpp23nehtzzg");
+        assertEquals(idOfPhoto1, ID_ISRAEL_PHOTO1);
+        assertEquals(idOfPhoto2, ID_ISRAEL_PHOTO2);
+        assertEquals(idOfPhoto3, ID_ISRAEL_PHOTO3);
     }
 
 
@@ -56,8 +81,8 @@ public class FilteringTest
         String idOfPhoto1 = sortedPhotoList.get(0);
         String idOfPhoto2 = sortedPhotoList.get(1);
 
-        assertEquals(idOfPhoto1, "psot5cs97506oo7c");
-        assertEquals(idOfPhoto2, "psot5vm3qxk3f5a1");
+        assertEquals(idOfPhoto1, ID_2018_PHOTO1);
+        assertEquals(idOfPhoto2, ID_2018_PHOTO2);
     }
 
 
@@ -72,9 +97,9 @@ public class FilteringTest
         String idOfPhoto2 = sortedPhotoList.get(1);
         String idOfPhoto3 = sortedPhotoList.get(2);
 
-        assertEquals(idOfPhoto1, "psosjn9t5iu3hpdt");
-        assertEquals(idOfPhoto2, "psosjpp23nehtzzg");
-        assertEquals(idOfPhoto3, "psosoy75flwtf358");
+        assertEquals(idOfPhoto1, ID_ANIMAL_PHOTO1);
+        assertEquals(idOfPhoto2, ID_ANIMAL_PHOTO2);
+        assertEquals(idOfPhoto3, ID_ANIMAL_PHOTO3);
     }
 
 
@@ -86,7 +111,7 @@ public class FilteringTest
         List<String> sortedPhotoList=PhotoCollectionUtils.sortIDs(photoList); //  Sort IDs to ensure consistent order
 
         String idOfPhoto1=sortedPhotoList.get(0);
-        assertEquals(idOfPhoto1,"psospby5uudwhqz2");
+        assertEquals(idOfPhoto1,ID_RED_PHOTO);
 
     }
 
@@ -102,8 +127,8 @@ public class FilteringTest
         String idOfPhoto1=sortedPhotoList.get(0);
         String idOfPhoto2=sortedPhotoList.get(1);
 
-        assertEquals(idOfPhoto1,"psosuc52rcs4fwep");
-        assertEquals(idOfPhoto2,"psot5vm3qxk3f5a1");
+        assertEquals(idOfPhoto1,ID_OCTOBER_PHOTO1);
+        assertEquals(idOfPhoto2,ID_OCTOBER_PHOTO2);
 
 
     }
@@ -119,8 +144,8 @@ public class FilteringTest
         String idOfPhoto1=sortedPhotoList.get(0);
         String idOfPhoto2=sortedPhotoList.get(1);
 
-        assertEquals(idOfPhoto1,"psot5cs97506oo7c");
-        assertEquals(idOfPhoto2,"psot5vm3qxk3f5a1");
+        assertEquals(idOfPhoto1,ID_GERMANY2018_PHOTO1);
+        assertEquals(idOfPhoto2,ID_GERMANY2018_PHOTO2);
 
     }
 

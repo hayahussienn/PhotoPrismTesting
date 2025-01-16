@@ -1,7 +1,6 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +12,13 @@ public class SearchingAPITest {
     private  final String BASE_URL = "http://localhost:2342";
     private  final String USERNAME = "Admin";
     private  final String PASSWORD = "yourpassword";
+
+    // Photo IDs as constants
+    private static final String ID_CAT_PHOTO1 = "psosjn9t5iu3hpdt";
+    private static final String ID_CAT_PHOTO2 = "psosjpp23nehtzzg";
+    private static final String ID_DOG_PHOTO = "psosoy75flwtf358";
+    private static final String ID_CAR_PHOTO = "psot5ohml895cwwd";
+
 
     @BeforeEach
     public void setup() {
@@ -63,7 +69,7 @@ public class SearchingAPITest {
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("$", hasSize(2)) // Verify that exactly two photos are returned
-                .body("UID", hasItems("psosjn9t5iu3hpdt", "psosjpp23nehtzzg")) ;// Verify both UIDs are present
+                .body("UID", hasItems(ID_CAT_PHOTO1, ID_CAT_PHOTO2 )) ;// Verify both UIDs are present
     }
     @Test
     public void testSearchPhotosByTwoKeywords()
@@ -73,7 +79,7 @@ public class SearchingAPITest {
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("$", hasSize(2)) // Verify that exactly two photos are returned
-                .body("UID", hasItems("psosoy75flwtf358", "psot5ohml895cwwd")) ;// Verify both UIDs are present
+                .body("UID", hasItems(ID_DOG_PHOTO, ID_CAR_PHOTO)) ;// Verify both UIDs are present
     }
     @Test
     public void testSearchPhotosByInvalidKeyword()

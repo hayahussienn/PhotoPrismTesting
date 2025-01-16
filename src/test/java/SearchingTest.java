@@ -19,6 +19,12 @@ public class SearchingTest
     private LoginPage login;
     private HomePage homePage;
 
+    // Photo IDs as constants
+    private static final String ID_CAT_PHOTO1 = "psosjn9t5iu3hpdt";
+    private static final String ID_CAT_PHOTO2 = "psosjpp23nehtzzg";
+    private static final String ID_DOG_PHOTO = "psosoy75flwtf358";
+    private static final String ID_CAR_PHOTO = "psot5ohml895cwwd";
+
     @BeforeEach
     public void setup() {
         driver = new ChromeDriver();
@@ -37,8 +43,8 @@ public class SearchingTest
         String idOfPhoto1 = sortedPhotoList.get(0);
         String idOfPhoto2 = sortedPhotoList.get(1);
 
-        assertEquals(idOfPhoto1, "psosjn9t5iu3hpdt");
-        assertEquals(idOfPhoto2, "psosjpp23nehtzzg");
+        assertEquals(idOfPhoto1, ID_CAT_PHOTO1);
+        assertEquals(idOfPhoto2, ID_CAT_PHOTO2);
 
     }
 
@@ -52,8 +58,8 @@ public class SearchingTest
         String idOfPhoto1 = sortedPhotoList.get(0);
         String idOfPhoto2 = sortedPhotoList.get(1);
 
-        assertEquals(idOfPhoto1, "psosoy75flwtf358");
-        assertEquals(idOfPhoto2, "psot5ohml895cwwd");
+        assertEquals(idOfPhoto1, ID_DOG_PHOTO);
+        assertEquals(idOfPhoto2, ID_CAR_PHOTO);
     }
 
     @Test
