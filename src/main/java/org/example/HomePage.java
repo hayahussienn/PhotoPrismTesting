@@ -12,15 +12,28 @@ public class HomePage
 {
     private WebDriver driver;
     private By contentPageBy = By.className("v-dialog__content");
-    private By dropButtonBy = By.className("p-expand-search");
+    private SearchingActions searchActions;
+    private FilteringActions filteringActions;
+
+
+
 
 
 
     public HomePage(WebDriver driver)
     {
         this.driver = driver;
+        this.searchActions = new SearchingActions(driver); // Composition: HomePage "has a" SearchingActions
+        this.filteringActions = new FilteringActions(driver); // Composition: HomePage "has a" FilteringActions
 
+    }
+    public SearchingActions getSearchActions()
+    {
+        return searchActions;
+    }
 
+    public FilteringActions getFilteringActions() {
+        return filteringActions;
     }
 
     public boolean isLoggedInSuccess()

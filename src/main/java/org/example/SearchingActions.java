@@ -15,7 +15,7 @@ public class SearchingActions
     private WebDriver driver;
     private By searchBoxBy = By.xpath("//input[@aria-label='Search']");
     private By photoListBy = By.cssSelector("div.result.card.is-photo");
-    private By noPictureMessageBy = By.xpath("//h3[@class='body-2 ma-0 pa-0' and span[text()='No pictures found']]");
+    private By messageBy = By.xpath("//h3[@class='body-2 ma-0 pa-0' and span[text()='No pictures found']]");
 
 
 
@@ -55,8 +55,6 @@ public class SearchingActions
         // Wait until the photos are displayed
         wait.until(d -> !driver.findElements(photoListBy).isEmpty());
 
-        // Wait until the photos are visible and retrieve the list
-        wait.until(d -> !driver.findElements(photoListBy).isEmpty());
         return driver.findElements(photoListBy);
     }
 
@@ -64,7 +62,7 @@ public class SearchingActions
     {
         searchByKeyword(invalidKeyWord);
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
-        WebElement noPictureMessage = driver.findElement(noPictureMessageBy);
+        WebElement noPictureMessage = driver.findElement(messageBy);
         wait.until(d -> noPictureMessage.isDisplayed());
         return noPictureMessage.getText();
     }
