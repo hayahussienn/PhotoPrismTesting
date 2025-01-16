@@ -123,6 +123,7 @@ public class FilteringTest {
         assertEquals(idOfPhoto1,"psosuc52rcs4fwep");
         assertEquals(idOfPhoto2,"psot5vm3qxk3f5a1");
 
+
     }
 
     @Test
