@@ -1,3 +1,5 @@
+package UITests;
+
 import org.example.HomePage;
 import org.example.LoginPage;
 import org.junit.jupiter.api.AfterEach;
