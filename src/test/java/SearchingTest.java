@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.example.PhotoCollectionUtils;
+
 
 import java.util.List;
 
@@ -15,14 +17,12 @@ public class SearchingTest {
     private static final String baseURL = "http://localhost:2342/library/browse";
     private LoginPage login;
     private HomePage homePage;
-    private PhotoCollection photoCollection;
 
     @BeforeEach
     public void setup() {
         driver = new ChromeDriver();
         driver.get(baseURL);
         login = new LoginPage(driver);
-        photoCollection = new PhotoCollection(driver);
         homePage = login.signInAsValidUser("admin", "yourpassword"); // Navigate to home page after login
     }
 
@@ -35,13 +35,15 @@ public class SearchingTest {
     @Test
     public void testResultOfSearchByCatKeyWord() {
         List<WebElement> photoList = homePage.getSearchActions().getListofPhotosByKeyWord("cat");
-        List<String> sortedPhotoList = photoCollection.sortIDs(photoList); // Sort IDs to ensure consistent order
+        List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
         String idOfPhoto1 = sortedPhotoList.get(0);
         String idOfPhoto2 = sortedPhotoList.get(1);
 
         assertEquals(idOfPhoto1, "psosjn9t5iu3hpdt");
         assertEquals(idOfPhoto2, "psosjpp23nehtzzg");
+
+
     }
 
     @Test
@@ -53,7 +55,7 @@ public class SearchingTest {
     @Test
     public void testResultFor2KeywordSearch() {
         List<WebElement> photoList = homePage.getSearchActions().getListofPhotosByKeyWord("car dog");
-        List<String> sortedPhotoList = photoCollection.sortIDs(photoList); // Sort IDs to ensure consistent order
+        List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
         String idOfPhoto1 = sortedPhotoList.get(0);
         String idOfPhoto2 = sortedPhotoList.get(1);

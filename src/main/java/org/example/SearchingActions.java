@@ -51,19 +51,22 @@ public class SearchingActions
     public List<WebElement> getListofPhotosByKeyWord(String keyWord)
     {
         searchByKeyword(keyWord);
-        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
-        // Wait until the photos are displayed
-        wait.until(d -> !driver.findElements(photoListBy).isEmpty());
 
-        return driver.findElements(photoListBy);
+        List<WebElement> photoList=driver.findElements(photoListBy);
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
+        wait.until(d -> !photoList.isEmpty());
+
+        return photoList;
     }
 
     public  String searchWithInvalidKeyWord(String invalidKeyWord)
     {
         searchByKeyword(invalidKeyWord);
+
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
         WebElement noPictureMessage = driver.findElement(messageBy);
         wait.until(d -> noPictureMessage.isDisplayed());
+
         return noPictureMessage.getText();
     }
 
