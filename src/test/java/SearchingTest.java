@@ -48,7 +48,7 @@ public class SearchingTest {
 
     @Test
     public void testCountResultOf2Keywords() {
-        List<WebElement> photoList = homePage.getSearchActions().getListofPhotosByKeyWord("car dog");
+        List<WebElement> photoList = homePage.getSearchActions().getListofPhotosBySearch2KeyWord("car dog");
         assertEquals(photoList.size(), 2);
     }
 

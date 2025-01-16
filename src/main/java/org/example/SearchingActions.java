@@ -16,6 +16,7 @@ public class SearchingActions
     private By searchBoxBy = By.xpath("//input[@aria-label='Search']");
     private By photoListBy = By.cssSelector("div.result.card.is-photo");
     private By messageBy = By.xpath("//h3[@class='body-2 ma-0 pa-0' and span[text()='No pictures found']]");
+    private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
 
 
 
@@ -45,19 +46,29 @@ public class SearchingActions
         searchBox.sendKeys(keyWord);
         searchBox.sendKeys(Keys.ENTER);
 
-
     }
+
+    private List<WebElement> waitForPhotoResults(int resultSize)
+    {
+        Wait<WebDriver> wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
+        wait.until(d -> driver.findElements(photoListBy).size() == resultSize);
+        return driver.findElements(photoListBy);
+    }
+
 
     public List<WebElement> getListofPhotosByKeyWord(String keyWord)
     {
         searchByKeyword(keyWord);
-
-        List<WebElement> photoList=driver.findElements(photoListBy);
-        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
-        wait.until(d -> !photoList.isEmpty());
-
-        return photoList;
+        return waitForPhotoResults(2);
     }
+
+
+    public List<WebElement> getListofPhotosBySearch2KeyWord(String keyWord)
+    {
+        searchByKeyword(keyWord);
+        return waitForPhotoResults(2);
+    }
+
 
     public  String searchWithInvalidKeyWord(String invalidKeyWord)
     {

@@ -42,10 +42,10 @@ public class FilteringActions {
         wait.until(d -> element.isDisplayed() && element.isEnabled());
     }
 
-    private List<WebElement> waitForPhotoResults()
+    private List<WebElement> waitForPhotoResults(int resultSize)
     {
         Wait<WebDriver> wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
-        wait.until(d -> driver.findElements(photoListBy).size() > 0);
+        wait.until(d -> driver.findElements(photoListBy).size() == resultSize);
         return driver.findElements(photoListBy);
     }
 
@@ -67,7 +67,7 @@ public class FilteringActions {
         waitForElementToBeClickable(israelOption);
         israelOption.click();
 
-        return waitForPhotoResults();
+        return waitForPhotoResults(3);
     }
 
     public List<WebElement> filterByYear2018()
@@ -81,7 +81,7 @@ public class FilteringActions {
         waitForElementToBeClickable(year2018Option);
         year2018Option.click();
 
-        return waitForPhotoResults();
+        return waitForPhotoResults(2);
     }
 
     public List<WebElement> filterByCategoryAnimal()
@@ -95,7 +95,7 @@ public class FilteringActions {
         waitForElementToBeClickable(animalOption);
         animalOption.click();
 
-        return waitForPhotoResults();
+        return waitForPhotoResults(3);
     }
 
     public List<WebElement> filterByColorRed()
@@ -109,7 +109,7 @@ public class FilteringActions {
         waitForElementToBeClickable(redOption);
         redOption.click();
 
-        return waitForPhotoResults();
+        return waitForPhotoResults(1);
     }
 
     public List<WebElement> filterByMonthOctober()
@@ -123,7 +123,7 @@ public class FilteringActions {
         waitForElementToBeClickable(octoberOption);
         octoberOption.click();
 
-        return waitForPhotoResults();
+        return waitForPhotoResults(2);
     }
 
     public List<WebElement>  filterPhotosByCountryGermanyAndYear2018()
@@ -145,6 +145,6 @@ public class FilteringActions {
 
 
 
-        return waitForPhotoResults();
+        return waitForPhotoResults(2);
     }
 }
