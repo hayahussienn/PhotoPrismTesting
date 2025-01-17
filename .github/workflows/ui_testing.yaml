@@ -34,14 +34,6 @@ jobs:
           distribution: 'temurin'
           java-version: '23'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
       - name: Launch standalone grid - Chrome
         if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
         run: |
@@ -52,18 +44,10 @@ jobs:
           export BROWSER=chrome
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn test -Dtest=UITests.*
+          mvn -q test
           
           # Tear down grid if exists
           docker stop grid_container || true
-          docker rm grid_container || true
-
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Chrome Test Results
-          path: target/surefire-reports/
 
   TestFirefox_133_0:
     name: Test Firefox 133.0
@@ -79,14 +63,6 @@ jobs:
           distribution: 'temurin'
           java-version: '23'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
       - name: Launch standalone grid - Firefox
         if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
         run: |
@@ -97,15 +73,7 @@ jobs:
           export BROWSER=firefox
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn test -Dtest=UITests.*
+          mvn test -Dtest=**/UITests/*
           
           # Tear down grid if exists
           docker stop grid_container || true
-          docker rm grid_container || true
-
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Firefox Test Results
-          path: target/surefire-reports/
