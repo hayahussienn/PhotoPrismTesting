@@ -73,7 +73,6 @@ jobs:
           export BROWSER=firefox
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn test 
-          
+          mvn test -Dtest=**/UITests/*          
           # Tear down grid if exists
           docker stop grid_container || true
