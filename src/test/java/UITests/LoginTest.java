@@ -43,6 +43,12 @@ public class LoginTest
         login = new LoginPage(driver); // Properly initialize login
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
 
+        if (driver != null) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            System.out.println("Driver is null");
+        }
+
     }
 
 
