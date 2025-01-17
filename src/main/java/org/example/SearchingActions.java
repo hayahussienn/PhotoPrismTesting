@@ -44,6 +44,11 @@ public class SearchingActions
 
         // Enter the keyword and press ENTER
         searchBox.sendKeys(keyWord);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         searchBox.sendKeys(Keys.ENTER);
 
     }
