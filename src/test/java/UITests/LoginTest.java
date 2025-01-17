@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginTest
@@ -19,7 +21,7 @@ public class LoginTest
     @BeforeEach
     public void setup()
     {
-        driver = new ChromeDriver();
+        driver = getDriver();
         driver.get(baseURL);
         login = new LoginPage(driver);
 

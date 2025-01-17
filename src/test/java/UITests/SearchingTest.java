@@ -12,6 +12,7 @@ import org.example.PhotoCollectionUtils;
 
 import java.util.List;
 
+import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchingTest
@@ -29,7 +30,7 @@ public class SearchingTest
 
     @BeforeEach
     public void setup() {
-        driver = new ChromeDriver();
+        driver =getDriver();
         driver.get(baseURL);
         login = new LoginPage(driver);
         homePage = login.signInAsValidUser("admin", "yourpassword"); // Navigate to home page after login
