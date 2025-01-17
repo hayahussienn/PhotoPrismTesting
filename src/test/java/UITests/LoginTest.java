@@ -27,9 +27,9 @@ public class LoginTest
 
 
     @BeforeEach
-    public void setup()
-    {
-        driver = getDriver();
+    public void setup() {
+        driver = getDriver(); // Ensure getDriver() returns a valid WebDriver instance
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
         driver.get(baseURL);
 
         try {
@@ -40,8 +40,7 @@ public class LoginTest
             System.out.println("Ngrok warning page was not loaded");
         }
 
-        login = new LoginPage(driver);
-
+        login = new LoginPage(driver); // Properly initialize login
     }
 
 
