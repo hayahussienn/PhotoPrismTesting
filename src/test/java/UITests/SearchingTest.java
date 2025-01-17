@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SearchingTest
 {
     WebDriver driver;
-    private static final String baseURL = "https://d0af-2a06-c701-9dff-a900-a12b-6398-7b7-8d4e.ngrok-free.app";
+    private static final String baseURL = "https://3165-2a06-c701-9dff-a900-b552-d01-60f7-378c.ngrok-free.app/library/browse";
     private LoginPage login;
     private HomePage homePage;
 
