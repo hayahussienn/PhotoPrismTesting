@@ -12,7 +12,7 @@ import java.util.List;
 public class FilteringActions {
 
     private WebDriver driver;
-    private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
+    private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(15);
 
     // Locators
     private By expandSearchBy = By.cssSelector("button.p-expand-search.v-btn[title='Expand Search']");
