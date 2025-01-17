@@ -32,10 +32,15 @@ public class LoginPage
 
     public HomePage signInAsValidUser(String userName, String password)
     {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
+
 
         driver.findElement(userNameFieldBy).sendKeys(userName);
         driver.findElement(passwordFieldBy).sendKeys(password);
         driver.findElement(signInButtonBy).click();
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
+
         return new HomePage(driver);
 
 

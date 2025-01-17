@@ -41,14 +41,19 @@ public class LoginTest
         }
 
         login = new LoginPage(driver); // Properly initialize login
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
+
     }
 
 
     @Test
     public void testValidUser()
     {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
 
         HomePage home = login.signInAsValidUser("admin", "yourpassword");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
+
         assertTrue(home.isLoggedInSuccess());
     }
 
