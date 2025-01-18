@@ -25,41 +25,42 @@ public class LoginPage
     {
         this.driver = driver;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-
-
     }
 
-    public HomePage signInAsValidUser(String userName, String password)
-    {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
+    public HomePage signInAsValidUser(String userName, String password) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-
+        wait.until(d -> d.findElement(userNameFieldBy).isDisplayed());
         driver.findElement(userNameFieldBy).sendKeys(userName);
-        driver.findElement(passwordFieldBy).sendKeys(password);
-        driver.findElement(signInButtonBy).click();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
+        wait.until(d -> d.findElement(passwordFieldBy).isDisplayed());
+        driver.findElement(passwordFieldBy).sendKeys(password);
+
+        wait.until(d -> d.findElement(signInButtonBy).isEnabled());
+        driver.findElement(signInButtonBy).click();
 
         return new HomePage(driver);
-
-
     }
 
-    public LoginPage signInAsInValidUser(String userName, String password)
-    {
+
+    public LoginPage signInAsInValidUser(String userName, String password) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(d -> d.findElement(userNameFieldBy).isDisplayed());
         driver.findElement(userNameFieldBy).sendKeys(userName);
+
+        wait.until(d -> d.findElement(passwordFieldBy).isDisplayed());
         driver.findElement(passwordFieldBy).sendKeys(password);
+
+        wait.until(d -> d.findElement(signInButtonBy).isEnabled());
         driver.findElement(signInButtonBy).click();
+
         return new LoginPage(driver);
-
-
     }
 
 
     public  boolean isLoggedInFailed()
     {
-
         WebElement failedMessage = driver.findElement(failedMessageBy);
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(500));
         wait.until(d -> failedMessage.isDisplayed());
