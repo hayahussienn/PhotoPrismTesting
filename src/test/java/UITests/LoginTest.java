@@ -29,7 +29,6 @@ public class LoginTest
     @BeforeEach
     public void setup() {
         driver = getDriver(); // Ensure getDriver() returns a valid WebDriver instance
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
         driver.get(baseURL);
 
         try {
@@ -41,8 +40,6 @@ public class LoginTest
         }
 
         login = new LoginPage(driver); // Properly initialize login
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
-
         if (driver != null) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         } else {
@@ -55,11 +52,8 @@ public class LoginTest
     @Test
     public void testValidUser()
     {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
 
         HomePage home = login.signInAsValidUser("admin", "yourpassword");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Add implicit wait
-
         assertTrue(home.isLoggedInSuccess());
     }
 
