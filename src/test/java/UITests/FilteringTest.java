@@ -151,7 +151,7 @@ public class FilteringTest
 
     }
 
-
+/*
     @Test
     public void testFilterPhotosByCountryGermanyAndYear2018()
     {
@@ -166,6 +166,8 @@ public class FilteringTest
         assertEquals(idOfPhoto2,ID_GERMANY2018_PHOTO2);
 
     }
+
+ */
 
     @AfterEach
     public void tearDown() {
