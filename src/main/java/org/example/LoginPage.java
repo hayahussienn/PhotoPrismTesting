@@ -27,35 +27,28 @@ public class LoginPage
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    public HomePage signInAsValidUser(String userName, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        wait.until(d -> d.findElement(userNameFieldBy).isDisplayed());
+    public HomePage signInAsValidUser(String userName, String password)
+    {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(userNameFieldBy).sendKeys(userName);
-
-        wait.until(d -> d.findElement(passwordFieldBy).isDisplayed());
         driver.findElement(passwordFieldBy).sendKeys(password);
-
-        wait.until(d -> d.findElement(signInButtonBy).isEnabled());
         driver.findElement(signInButtonBy).click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         return new HomePage(driver);
+
+
     }
 
-
-    public LoginPage signInAsInValidUser(String userName, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        wait.until(d -> d.findElement(userNameFieldBy).isDisplayed());
+    public LoginPage signInAsInValidUser(String userName, String password)
+    {
         driver.findElement(userNameFieldBy).sendKeys(userName);
-
-        wait.until(d -> d.findElement(passwordFieldBy).isDisplayed());
         driver.findElement(passwordFieldBy).sendKeys(password);
-
-        wait.until(d -> d.findElement(signInButtonBy).isEnabled());
         driver.findElement(signInButtonBy).click();
 
         return new LoginPage(driver);
+
+
     }
 
 
