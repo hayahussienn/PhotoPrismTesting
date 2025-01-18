@@ -27,7 +27,6 @@ public class FilteringActions {
     private By redOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='Red']");
     private By filterMonthBy = By.className("p-month-select");
     private By octoberOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='October']");
-    private By germanyOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='Germany']");
 
 
 
@@ -126,25 +125,5 @@ public class FilteringActions {
         return waitForPhotoResults(2);
     }
 
-    public List<WebElement>  filterPhotosByCountryGermanyAndYear2018()
-    {
-        clickOnExpandButton();
-        WebElement filterByCountry = driver.findElement(filterCountryBy);
-        waitForElementToBeClickable(filterByCountry);
-        filterByCountry.click();
 
-        WebElement germanyOption = driver.findElement(germanyOptionBy);
-        waitForElementToBeClickable(germanyOption);
-        germanyOption.click();
-
-        WebElement filterByYear = driver.findElement(filterYearBy);
-        filterByYear.click();
-
-        WebElement Option2018 = driver.findElement(option2018By);
-        Option2018.click();
-
-
-
-        return waitForPhotoResults(2);
-    }
 }

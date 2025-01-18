@@ -24,9 +24,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FilteringTest
 {
     WebDriver driver;
-    private static final String baseURL = "  https://a41f-2a06-c701-9dff-a900-b552-d01-60f7-378c.ngrok-free.app";
+    private static final String baseURL = "https://377f-2a06-c701-9dff-a900-d4f0-e92f-86d-d5bf.ngrok-free.app";
     private LoginPage login;
     private HomePage homePage;
+
+    private final String USERNAME = "Admin";
+    private final String PASSWORD = "yourpassword";
 
 
     // Photo IDs as constants
@@ -68,7 +71,7 @@ public class FilteringTest
         }
 
         login = new LoginPage(driver);
-        homePage = login.signInAsValidUser("admin", "yourpassword"); // Navigate to home page after login
+        homePage = login.signInAsValidUser(USERNAME, PASSWORD); // Navigate to home page after login
     }
 
 
@@ -151,23 +154,7 @@ public class FilteringTest
 
     }
 
-/*
-    @Test
-    public void testFilterPhotosByCountryGermanyAndYear2018()
-    {
-        List<WebElement> photoList=homePage.getFilteringActions().filterPhotosByCountryGermanyAndYear2018();
-        assertEquals(photoList.size(),2);
-        List<String> sortedPhotoList=PhotoCollectionUtils.sortIDs(photoList);  // Sort IDs to ensure consistent order
 
-        String idOfPhoto1=sortedPhotoList.get(0);
-        String idOfPhoto2=sortedPhotoList.get(1);
-
-        assertEquals(idOfPhoto1,ID_GERMANY2018_PHOTO1);
-        assertEquals(idOfPhoto2,ID_GERMANY2018_PHOTO2);
-
-    }
-
- */
 
     @AfterEach
     public void tearDown() {

@@ -24,9 +24,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SearchingTest
 {
     WebDriver driver;
-    private static final String baseURL = " https://a41f-2a06-c701-9dff-a900-b552-d01-60f7-378c.ngrok-free.app";
+    private static final String baseURL = "https://377f-2a06-c701-9dff-a900-d4f0-e92f-86d-d5bf.ngrok-free.app";
     private LoginPage login;
     private HomePage homePage;
+
+    private final String USERNAME = "Admin";
+    private final String PASSWORD = "yourpassword";
 
     // Photo IDs as constants
     private static final String ID_CAT_PHOTO1 = "psosjn9t5iu3hpdt";
@@ -47,7 +50,7 @@ public class SearchingTest
         }
 
         login = new LoginPage(driver);
-        homePage = login.signInAsValidUser("admin", "yourpassword"); // Navigate to home page after login
+        homePage = login.signInAsValidUser(USERNAME, PASSWORD); // Navigate to home page after login
     }
 
 

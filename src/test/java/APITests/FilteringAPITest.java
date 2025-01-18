@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.*;
 public class FilteringAPITest {
 
     private String accessToken;
-    private final String BASE_URL = "https://a41f-2a06-c701-9dff-a900-b552-d01-60f7-378c.ngrok-free.app";
+    private final String BASE_URL = "https://377f-2a06-c701-9dff-a900-d4f0-e92f-86d-d5bf.ngrok-free.app";
     private final String USERNAME = "Admin";
     private final String PASSWORD = "yourpassword";
 
