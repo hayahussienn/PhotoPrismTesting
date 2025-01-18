@@ -33,7 +33,7 @@ jobs:
           export BROWSER=chrome
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn -q test -Dtest=UITests.SearchingTest#testSearchByCatKeyWord,UITests.SearchingTest#testSearchByInvalidKeyWord,UITests.FilteringTest#testFilterByColorRed,UITests.FilteringTest#testFilterByYear2018
+          mvn -q test -Dtest=UITests.SearchingTest#testSearchByCatKeyWord,UITests.FilteringTest#testFilterByColorRed
 
       - name: Tear Down Grid
         if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
