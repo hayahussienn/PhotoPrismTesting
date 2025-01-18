@@ -1,4 +1,4 @@
-name: UI Testing
+name: UI testing
 
 on:
   workflow_dispatch:
@@ -8,19 +8,22 @@ on:
         type: string
         description: Grid to run tests on (local by default)
         default: http://localhost:4444
-      browser:
-        description: 'Select Browser'
-        required: true
-        type: choice
-        options:
-          - chrome
-          - firefox
-        default: 'chrome'
+
+      chrome_131_0:
+        description: 'Chrome (131.0)'
+        required: false
+        type: boolean
+
+      firefox_133_0:
+        description: 'Firefox (133.0)'
+        required: false
+        type: boolean
 
 jobs:
-  ui-tests:
-    name: Run UI Tests
+  TestChrome_131_0:
+    name: Test Chrome 131.0
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.chrome_131_0 == 'true' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,44 +33,47 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '23'
-          cache: 'maven'
 
-      - name: Setup Chrome
-        if: ${{ inputs.browser == 'chrome' }}
+      - name: Launch standalone grid - Chrome
+        if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
         run: |
-          docker run --name selenium-hub -d -p 4444:4444 --shm-size=2gb selenium/standalone-chrome:4.27.0
+          docker run --name grid_container -d -p 4444:4444 --shm-size=2gb selenium/standalone-chrome:131.0-chromedriver-131.0-grid-4.27.0-20250101
 
-      - name: Setup Firefox
-        if: ${{ inputs.browser == 'firefox' }}
+      - name: Run Tests
         run: |
-          docker run --name selenium-hub -d -p 4444:4444 --shm-size=2gb selenium/standalone-firefox:4.27.0
+          export BROWSER=chrome
+          export GRID_URL=${{ github.event.inputs.grid_url }}
+          
+          mvn -q test -Dtest=UITests
+          
+          # Tear down grid if exists
+          docker stop grid_container || true
 
-      - name: Wait for Selenium Grid
-        run: |
-          echo "Waiting for Selenium Grid to be ready..."
-          timeout 30 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:4444/wd/hub/status)" != "200" ]]; do sleep 2; done' || false
+  TestFirefox_133_0:
+    name: Test Firefox 133.0
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.firefox_133_0 == 'true' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Run UI Tests
-        run: |
-          mvn test -Dtest=UITests.** -Dbrowser=${{ inputs.browser }} -Dgrid.url=${{ inputs.grid_url }}
-        env:
-          MAVEN_OPTS: "-Xmx2048m"
-
-      - name: Capture Selenium Logs
-        if: always()
-        run: |
-          docker logs selenium-hub
-
-      - name: Stop Selenium Grid
-        if: always()
-        run: |
-          docker stop selenium-hub
-          docker rm selenium-hub
-
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
+      - name: Set up JDK 23
+        uses: actions/setup-java@v3
         with:
-          name: test-results
-          path: target/surefire-reports/
-          retention-days: 7
+          distribution: 'temurin'
+          java-version: '23'
+
+      - name: Launch standalone grid - Firefox
+        if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
+        run: |
+          docker run --name grid_container -d -p 4444:4444 --shm-size=2gb selenium/standalone-firefox:133.0-geckodriver-0.35-grid-4.27.0-20250101
+
+      - name: Run Tests
+        run: |
+          export BROWSER=firefox
+          export GRID_URL=${{ github.event.inputs.grid_url }}
+          
+          mvn test -Dtest=UITests
+          
+          # Tear down grid if exists
+          docker stop grid_container || true
