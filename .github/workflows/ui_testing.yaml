@@ -8,12 +8,10 @@ on:
         type: string
         description: Grid to run tests on (local by default)
         default: http://localhost:4444
-
       chrome_131_0:
         description: 'Chrome (131.0)'
         required: false
         type: boolean
-
       firefox_133_0:
         description: 'Firefox (133.0)'
         required: false
@@ -33,6 +31,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '23'
+          cache: 'maven'
 
       - name: Launch standalone grid - Chrome
         if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
@@ -43,11 +42,13 @@ jobs:
         run: |
           export BROWSER=chrome
           export GRID_URL=${{ github.event.inputs.grid_url }}
-          
-          mvn -q test
-          
-          # Tear down grid if exists
-          docker stop grid_container || true
+          mvn clean test
+        env:
+          MAVEN_OPTS: "-Xmx2048m"
+
+      - name: Cleanup
+        if: always()
+        run: docker stop grid_container || true
 
   TestFirefox_133_0:
     name: Test Firefox 133.0
@@ -62,6 +63,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '23'
+          cache: 'maven'
 
       - name: Launch standalone grid - Firefox
         if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
@@ -72,8 +74,10 @@ jobs:
         run: |
           export BROWSER=firefox
           export GRID_URL=${{ github.event.inputs.grid_url }}
-          
-          mvn test -Dtest=**/UITests/*
-          
-          # Tear down grid if exists
-          docker stop grid_container || true
+          mvn clean test -Dtest=**/UITests/*
+        env:
+          MAVEN_OPTS: "-Xmx2048m"
+
+      - name: Cleanup
+        if: always()
+        run: docker stop grid_container || true
