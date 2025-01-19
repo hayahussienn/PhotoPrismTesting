@@ -151,25 +151,6 @@ Performance: ≥65
 Best Practices: ≥90
 SEO: ≥90
 
-graph TD
-A[test] --> B[java]
-B --> C[APITests]
-B --> D[UITests]
-
-    C --> E[FilteringAPITest]
-    C --> F[SearchingAPITest]
-    
-    D --> G[FilteringTest]
-    D --> H[LoginTest]
-    D --> I[SearchingTest]
-
-    %% Styling
-    classDef package fill:#2d4059,stroke:#fff,stroke-width:2px,color:#fff
-    classDef testClass fill:#3a9679,stroke:#fff,stroke-width:2px,color:#fff
-    
-    class A,B,C,D package
-    class E,F,G,H,I testClass
-
 # Support
 
 For issues and questions, please:
