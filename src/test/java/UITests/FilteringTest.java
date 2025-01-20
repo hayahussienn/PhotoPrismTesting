@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FilteringTest
 {
     WebDriver driver;
-    private static final String baseURL = "https://4a69-2a06-c701-9dff-a900-9418-a6b-e2a8-e774.ngrok-free.app";
+    private static final String baseURL = "https://e215-2a06-c701-9dff-a900-3441-2fc3-cc1e-a20f.ngrok-free.app";
     private LoginPage login;
     private HomePage homePage;
 
@@ -49,8 +49,7 @@ public class FilteringTest
     private static final String ID_OCTOBER_PHOTO1 = "psosuc52rcs4fwep";
     private static final String ID_OCTOBER_PHOTO2 = "psot5vm3qxk3f5a1";
 
-    private static final String ID_GERMANY2018_PHOTO1 = "psot5cs97506oo7c";
-    private static final String ID_GERMANY2018_PHOTO2 ="psot5vm3qxk3f5a1";
+
 
 
 
