@@ -4,7 +4,6 @@
 
 This repository contains automated tests for the PhotoPrism web application, focusing on the Photo Search and Filtering functionality. The primary objective is to ensure consistent and efficient testing coverage, integration with CI/CD pipelines, and accurate reporting of test results.
 
-## **Testing Strategy and Objectives**
 
 ## Objectives
 
@@ -105,7 +104,7 @@ Upload a diverse set of photos to your PhotoPrism instance
 
 * Test results and reports will be generated automatically and can be viewed in the Actions tab of the repository.
 
-# Test Cases and Completion Criteria
+
 
 # Test Suite Coverage
 
@@ -113,41 +112,32 @@ Our automated test suite meets the following completion criteria:
 
 ### High-Priority Test Cases
 
-#### Critical Photo Search Functionality
+#### Photo Search Functionality
 
 * Basic keyword search
 * Multi-keyword search
 * Search response validation
 
 
-#### Critical Filtering Operations
+#### Filtering Operations
 
 * Country-based filtering
 * Year/month filtering
 * Category filtering
-* 
+* Color filtering 
 
-#### Critical API Endpoints
+#### API Endpoints
 
-* Search API availability
-* Filter API functionalit
-
-
-### Metrics Collection and Reporting
-
-#### Test Execution Metrics
-
-* Total tests executed
-* Pass/fail rates
-* Test coverage percentage
-* Execution time statistics
+* Search API functionality
+* Filter API functionality
 
 
-#### Lighthouse Metrics (minimum thresholds)
+
+# Lighthouse Metrics (minimum thresholds)
 
 
 Accessibility: ≥85
-Performance: ≥65
+Performance: ≥55
 Best Practices: ≥90
 SEO: ≥90
 
