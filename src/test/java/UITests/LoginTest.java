@@ -22,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LoginTest
 {
     WebDriver driver;
-    private static final String baseURL = "http://localhost:2342";
-    //private static final String baseURL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
+    //private static final String baseURL = "http://localhost:2342";
+    private static final String baseURL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
     private LoginPage login;
 
 
