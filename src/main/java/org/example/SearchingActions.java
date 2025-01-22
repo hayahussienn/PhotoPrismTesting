@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -53,25 +54,26 @@ public class SearchingActions
 
     }
 
-    private List<WebElement> waitForPhotoResults(int resultSize)
-    {
-        Wait<WebDriver> wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
-        wait.until(d -> driver.findElements(photoListBy).size() == resultSize);
-        return driver.findElements(photoListBy);
-    }
-
 
     public List<WebElement> getListofPhotosByKeyWord(String keyWord)
     {
         searchByKeyword(keyWord);
-        return waitForPhotoResults(2);
+        // Wait until photo results are visible
+        new WebDriverWait(driver, DEFAULT_TIMEOUT)
+                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(photoListBy));
+
+        return driver.findElements(photoListBy);
     }
 
 
     public List<WebElement> getListofPhotosBySearch2KeyWord(String keyWord)
     {
         searchByKeyword(keyWord);
-        return waitForPhotoResults(2);
+        // Wait until photo results are visible
+        new WebDriverWait(driver, DEFAULT_TIMEOUT)
+                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(photoListBy));
+
+        return driver.findElements(photoListBy);
     }
 
 

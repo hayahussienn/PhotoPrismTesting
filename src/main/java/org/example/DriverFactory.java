@@ -11,7 +11,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.Optional;
 
 public class DriverFactory {
@@ -28,10 +27,6 @@ public class DriverFactory {
             driver = getLocalDriver(browser);
         }
 
-        // Configure driver
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        driver.manage().window().maximize();
 
         return driver;
     }
@@ -61,17 +56,11 @@ public class DriverFactory {
 
     private static WebDriver getLocalDriver(String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--headless=new");
-            return new ChromeDriver(options);
+            return new ChromeDriver();
         } else if (browser.equalsIgnoreCase("firefox")) {
-            FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("-headless");
-            return new FirefoxDriver(options);
+            return new FirefoxDriver();
         } else {
             throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
-    }
 }
+    }

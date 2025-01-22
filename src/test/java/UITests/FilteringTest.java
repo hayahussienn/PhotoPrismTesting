@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.example.PhotoCollectionUtils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -24,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FilteringTest
 {
     WebDriver driver;
-    private static final String baseURL = "https://e215-2a06-c701-9dff-a900-3441-2fc3-cc1e-a20f.ngrok-free.app";
+    private static final String baseURL = "http://localhost:2342";
+    //private static final String baseURL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
     private LoginPage login;
     private HomePage homePage;
 
@@ -75,9 +75,9 @@ public class FilteringTest
 
 
     @Test
-    public void testFilterByCountryIsrael()
+    public void testFilterByCountry()
     {
-        List<WebElement> photoList = homePage.getFilteringActions().filterByCountryIsrael();
+        List<WebElement> photoList = homePage.getFilteringActions().filterByCountry("Israel");
         assertEquals(photoList.size(), 3);
         List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
@@ -93,8 +93,8 @@ public class FilteringTest
 
 
     @Test
-    public void testFilterByYear2018() {
-        List<WebElement> photoList = homePage.getFilteringActions().filterByYear2018();
+    public void testFilterByYear() {
+        List<WebElement> photoList = homePage.getFilteringActions().filterByYear(2018);
         assertEquals(photoList.size(), 2);
         List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
@@ -107,9 +107,9 @@ public class FilteringTest
 
 
     @Test
-    public void testFilterByCategoryAnimal()
+    public void testFilterByCategory()
     {
-        List<WebElement> photoList = homePage.getFilteringActions().filterByCategoryAnimal();
+        List<WebElement> photoList = homePage.getFilteringActions().filterByCategory("animal");
         assertEquals(photoList.size(), 3);
         List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
@@ -124,9 +124,9 @@ public class FilteringTest
 
 
     @Test
-    public void testFilterByColorRed()
+    public void testFilterByColor()
     {
-        List<WebElement> photoList=homePage.getFilteringActions().filterByColorRed();
+        List<WebElement> photoList=homePage.getFilteringActions().filterByColor("red");
         assertEquals(photoList.size(),1);
         List<String> sortedPhotoList=PhotoCollectionUtils.sortIDs(photoList); //  Sort IDs to ensure consistent order
 
@@ -138,9 +138,9 @@ public class FilteringTest
 
 
     @Test
-    public void testFilterByMonthOctober()
+    public void testFilterByMonth()
     {
-        List<WebElement> photoList=homePage.getFilteringActions().filterByMonthOctober();
+        List<WebElement> photoList=homePage.getFilteringActions().filterByMonth(10);
         assertEquals(photoList.size(),2);
         List<String> sortedPhotoList=PhotoCollectionUtils.sortIDs(photoList);  // Sort IDs to ensure consistent order
 

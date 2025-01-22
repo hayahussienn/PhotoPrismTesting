@@ -11,7 +11,8 @@ import static org.hamcrest.Matchers.*;
 
 public class SearchingAPITest {
     private  String accessToken;
-    private  final String BASE_URL = "https://e215-2a06-c701-9dff-a900-3441-2fc3-cc1e-a20f.ngrok-free.app";
+    private final String BASE_URL = "http://localhost:2342";
+    //private  final String BASE_URL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
     private  final String USERNAME = "Admin";
     private  final String PASSWORD = "yourpassword";
 

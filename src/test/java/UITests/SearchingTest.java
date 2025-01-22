@@ -24,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SearchingTest
 {
     WebDriver driver;
-    private static final String baseURL = "https://e215-2a06-c701-9dff-a900-3441-2fc3-cc1e-a20f.ngrok-free.app";
+    private static final String baseURL = "http://localhost:2342";
+    //private static final String baseURL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
     private LoginPage login;
     private HomePage homePage;
 
@@ -65,6 +66,17 @@ public class SearchingTest
 
         assertEquals(idOfPhoto1, ID_CAT_PHOTO1);
         assertEquals(idOfPhoto2, ID_CAT_PHOTO2);
+
+    }
+
+    @Test
+    public void testSearchByDogKeyWord() {
+        List<WebElement> photoList = homePage.getSearchActions().getListofPhotosByKeyWord("dog");
+        assertEquals(photoList.size(), 1);
+        List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
+        String idOfPhoto1 = sortedPhotoList.get(0);
+        assertEquals(idOfPhoto1, ID_DOG_PHOTO);
+
 
     }
 
