@@ -1,5 +1,10 @@
 name: UI testing
 
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
 on:
   workflow_dispatch:
     inputs:
