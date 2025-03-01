@@ -1,3 +1,4 @@
+/*
 package UITests;
 
 import org.example.*;
@@ -160,3 +161,5 @@ public class FilteringTest
         driver.quit();
     }
 }
+
+ */

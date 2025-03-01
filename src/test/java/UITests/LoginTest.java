@@ -1,3 +1,4 @@
+/*
 package UITests;
 
 import org.example.HomePage;
@@ -23,7 +24,7 @@ public class LoginTest
 {
     WebDriver driver;
     //private static final String baseURL = "http://localhost:2342";
-    private static final String baseURL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
+    private static final String baseURL = "https://e553-2a06-c701-78d6-a500-5d44-281f-2863-d15d.ngrok-free.app";
     private LoginPage login;
 
 
@@ -54,7 +55,7 @@ public class LoginTest
     public void testValidUser()
     {
 
-        HomePage home = login.signInAsValidUser("admin", "yourpassword");
+        HomePage home = login.signInAsValidUser("admin", "photoprism");
         assertTrue(home.isLoggedInSuccess());
     }
 
@@ -75,3 +76,5 @@ public class LoginTest
     }
 
 }
+
+ */

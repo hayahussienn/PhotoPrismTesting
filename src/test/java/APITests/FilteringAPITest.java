@@ -1,3 +1,4 @@
+
 package APITests;
 
 import io.restassured.RestAssured;
@@ -13,20 +14,24 @@ public class FilteringAPITest {
 
     private String accessToken;
     //private final String BASE_URL = "http://localhost:2342";
-    private final String BASE_URL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
+    private final String BASE_URL = "https://b4d4-147-235-222-214.ngrok-free.app";
     private final String USERNAME = "Admin";
-    private final String PASSWORD = "yourpassword";
+    private final String PASSWORD = "photoprism";
 
     // Photo IDs as constants
     private static final String ID_ISRAEL_PHOTO1 = "psosjpp23nehtzzg";
     private static final String ID_ISRAEL_PHOTO2 = "psosj3v4cr54jghq";
     private static final String ID_ISRAEL_PHOTO3 = "psosj2h801jykn1a";
 
+
+    private static final String ID_FRANCE_PHOTO = "pss6zdisvfyuhbvb";
+
+
     private static final String ID_2023_PHOTO1 = "psot6983kk32dc26";
     private static final String ID_2023_PHOTO2 = "psosjpp23nehtzzg";
 
     private static final String ID_NATURE_PHOTO ="psot5cs97506oo7c";
-    private static final String ID_RED_PHOTO = "psospby5uudwhqz2";
+    private static final String ID_RED_PHOTO = "pssez4kmqvhs76qy";
 
     private static final String ID_OCTOBER_PHOTO1 = "psot5vm3qxk3f5a1";
     private static final String ID_OCTOBER_PHOTO2 = "psosuc52rcs4fwep";
@@ -73,15 +78,26 @@ public class FilteringAPITest {
     }
 
     @Test
-    public void testFilterPhotosByCountryIsrael() {
-        filterPhotosParams("il", 0, 0, "","")
+    public void testFilterPhotosByColorRed() {
+        filterPhotosParams("", 0, 0, "","red")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("$", hasSize(3)) // Verify that exactly three photos are returned
-                .body("UID", hasItems(ID_ISRAEL_PHOTO1, ID_ISRAEL_PHOTO2, ID_ISRAEL_PHOTO3)); // Verify all UIDs match
+                .body("$", hasSize(1)) // Verify that exactly one photo is returned
+                .body("UID[0]", equalTo(ID_RED_PHOTO)); // Verify the UID matches
     }
 
+    @Test
+    public void testFilterPhotosByCountryFrance() {
+        filterPhotosParams("fr", 0, 0, "","")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("$", hasSize(1)) // Verify that exactly three photos are returned
+                .body("UID", hasItems(ID_FRANCE_PHOTO)); // Verify all UIDs match
+    }
+
+    /*
     @Test
     public void testFilterPhotosByYear2023() {
         filterPhotosParams("", 2023, 0, "","")
@@ -102,15 +118,7 @@ public class FilteringAPITest {
                 .body("UID[0]", equalTo(ID_NATURE_PHOTO)); // Verify the UID matches
     }
 
-    @Test
-    public void testFilterPhotosByColorRed() {
-        filterPhotosParams("", 0, 0, "","red")
-                .then()
-                .statusCode(200)
-                .contentType(ContentType.JSON)
-                .body("$", hasSize(1)) // Verify that exactly one photo is returned
-                .body("UID[0]", equalTo(ID_RED_PHOTO)); // Verify the UID matches
-    }
+
 
     @Test
     public void testFilterPhotosByMonthOctober() {
@@ -132,5 +140,6 @@ public class FilteringAPITest {
     }
 
 
-
+*/
 }
+

@@ -3,15 +3,18 @@ package org.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.time.Duration;
+import java.util.List;
 
 public class HomePage
 {
     private WebDriver driver;
-    private By contentPageBy = By.className("v-dialog__content");
+    private By contentPageBy = By.className("theme-default");
     private SearchingActions searchActions;
     private FilteringActions filteringActions;
 
@@ -44,7 +47,6 @@ public class HomePage
         return contentPage.isDisplayed();
 
     }
-
 
 
 }

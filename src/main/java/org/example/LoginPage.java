@@ -16,8 +16,7 @@ public class LoginPage
     private By userNameFieldBy = By.id("auth-username");
     private By passwordFieldBy = By.id("auth-password");
     private By signInButtonBy = By.cssSelector(".action-confirm ");
-    private  By failedMessageBy = By.cssSelector(".error span");
-
+    private  By failedMessageBy = By.className("v-overlay-container");
 
 
 

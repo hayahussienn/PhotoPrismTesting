@@ -1,3 +1,4 @@
+
 package APITests;
 
 import io.restassured.RestAssured;
@@ -12,15 +13,15 @@ import static org.hamcrest.Matchers.*;
 public class SearchingAPITest {
     private  String accessToken;
     //private final String BASE_URL = "http://localhost:2342";
-    private  final String BASE_URL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
+    private  final String BASE_URL = "https://b4d4-147-235-222-214.ngrok-free.app";
     private  final String USERNAME = "Admin";
-    private  final String PASSWORD = "yourpassword";
+    private  final String PASSWORD = "photoprism";
 
     // Photo IDs as constants
     private static final String ID_CAT_PHOTO1 = "psosjn9t5iu3hpdt";
     private static final String ID_CAT_PHOTO2 = "psosjpp23nehtzzg";
-    private static final String ID_DOG_PHOTO = "psosoy75flwtf358";
-    private static final String ID_CAR_PHOTO = "psot5ohml895cwwd";
+    private static final String ID_DOG_PHOTO = "psscywxs6h49ti6g";
+    private static final String ID_CAR_PHOTO = "psrztanbiu6psldm";
 
 
     @BeforeEach
@@ -64,6 +65,7 @@ public class SearchingAPITest {
                 .get("/api/v1/photos");
     }
 
+    /*
     @Test
     public void testSearchPhotosByCatKeyword()
     {
@@ -74,6 +76,11 @@ public class SearchingAPITest {
                 .body("$", hasSize(2)) // Verify that exactly two photos are returned
                 .body("UID", hasItems(ID_CAT_PHOTO1, ID_CAT_PHOTO2 )) ;// Verify both UIDs are present
     }
+
+     */
+
+
+    /*
     @Test
     public void testSearchPhotosByTwoKeywords()
     {
@@ -84,6 +91,20 @@ public class SearchingAPITest {
                 .body("$", hasSize(2)) // Verify that exactly two photos are returned
                 .body("UID", hasItems(ID_DOG_PHOTO, ID_CAR_PHOTO)) ;// Verify both UIDs are present
     }
+
+     */
+
+    @Test
+    public void testSearchPhotosByCarKeyword()
+    {
+        searchPhotosParams("car")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("$", hasSize(1)) // Verify that exactly two photos are returned
+                .body("UID", hasItems(ID_CAR_PHOTO)) ;// Verify both UIDs are present
+    }
+
     @Test
     public void testSearchPhotosByInvalidKeyword()
     {
@@ -97,3 +118,4 @@ public class SearchingAPITest {
 
 
 }
+

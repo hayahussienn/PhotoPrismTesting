@@ -14,7 +14,7 @@ import java.util.List;
 public class SearchingActions
 {
     private WebDriver driver;
-    private By searchBoxBy = By.xpath("//input[@aria-label='Search']");
+    private By searchBoxBy = By.id("input-48");
     private By photoListBy = By.cssSelector("div.result.card.is-photo");
     private By messageBy = By.xpath("//h3[@class='body-2 ma-0 pa-0' and span[text()='No pictures found']]");
     private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
