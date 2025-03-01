@@ -1,4 +1,4 @@
-/*
+
 package UITests;
 
 import org.example.HomePage;
@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LoginTest
 {
     WebDriver driver;
-    //private static final String baseURL = "http://localhost:2342";
-    private static final String baseURL = "https://e553-2a06-c701-78d6-a500-5d44-281f-2863-d15d.ngrok-free.app";
+    private static final String baseURL = "http://localhost:2342";
+    //private static final String baseURL = "https://e553-2a06-c701-78d6-a500-5d44-281f-2863-d15d.ngrok-free.app";
     private LoginPage login;
 
 
@@ -77,4 +77,3 @@ public class LoginTest
 
 }
 
- */

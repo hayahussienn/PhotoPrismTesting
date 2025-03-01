@@ -53,6 +53,7 @@ public class SearchingTest {
         login = new LoginPage(driver);
         homePage = login.signInAsValidUser(USERNAME, PASSWORD); // Navigate to home page after login
     }
+}
 
 
     /*
@@ -87,7 +88,7 @@ public class SearchingTest {
 }
 
 
-    /*
+
     @Test
     public void testSearchBy2KeyWords() {
         List<WebElement> photoList = homePage.getSearchActions().getListofPhotosBySearch2KeyWord("car dog");
