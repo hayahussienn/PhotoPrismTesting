@@ -13,8 +13,8 @@ import static org.hamcrest.Matchers.*;
 public class FilteringAPITest {
 
     private String accessToken;
-    //private final String BASE_URL = "http://localhost:2342";
-    private final String BASE_URL = "https://b4d4-147-235-222-214.ngrok-free.app";
+    private final String BASE_URL = "http://localhost:2342";
+    //private final String BASE_URL = "https://72ec-2a06-c701-78d6-a500-2dfd-69a0-ff4e-a513.ngrok-free.app";
     private final String USERNAME = "Admin";
     private final String PASSWORD = "photoprism";
 
@@ -24,14 +24,14 @@ public class FilteringAPITest {
     private static final String ID_ISRAEL_PHOTO3 = "psosj2h801jykn1a";
 
 
-    private static final String ID_FRANCE_PHOTO = "pss6zdisvfyuhbvb";
+    private static final String ID_FRANCE_PHOTO = "pssi8b6xosk1bbdn";
 
 
     private static final String ID_2023_PHOTO1 = "psot6983kk32dc26";
     private static final String ID_2023_PHOTO2 = "psosjpp23nehtzzg";
 
     private static final String ID_NATURE_PHOTO ="psot5cs97506oo7c";
-    private static final String ID_RED_PHOTO = "pssez4kmqvhs76qy";
+    private static final String ID_RED_PHOTO = "pssi68spcmhbimna";
 
     private static final String ID_OCTOBER_PHOTO1 = "psot5vm3qxk3f5a1";
     private static final String ID_OCTOBER_PHOTO2 = "psosuc52rcs4fwep";
