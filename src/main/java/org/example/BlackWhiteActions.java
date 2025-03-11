@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Set;
 
 public class BlackWhiteActions {
@@ -24,20 +25,42 @@ public class BlackWhiteActions {
     public boolean openPhoto() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
-            wait.until(ExpectedConditions.presenceOfElementLocated(photoCardSelector));
 
-            WebElement photo = driver.findElements(photoCardSelector).get(3);
-            Thread.sleep(3000);
-            photo.click();
+            // Ensure at least one photo is visible
+            List<WebElement> photos = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(photoCardSelector));
 
-            // Wait for the photo viewer to open
-            wait.until(ExpectedConditions.visibilityOfElementLocated(bwButtonSelector));
-            return true;
+            if (photos.isEmpty()) {
+                System.out.println("No photos found!");
+                return false;
+            }
+
+            // Try multiple photos in case one is unclickable
+            for (int attempt = 0; attempt < 3; attempt++) {
+                try {
+                    WebElement photo = photos.get(attempt % photos.size()); // Rotate through available photos
+                    wait.until(ExpectedConditions.elementToBeClickable(photo)).click();
+                    System.out.println("Photo clicked successfully.");
+
+                    // Wait for the B&W button to confirm viewer opened
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(bwButtonSelector));
+                    System.out.println("Photo viewer opened successfully.");
+                    return true;
+                } catch (StaleElementReferenceException e) {
+                    System.out.println("Photo element went stale, retrying...");
+                    photos = driver.findElements(photoCardSelector);
+                } catch (TimeoutException e) {
+                    System.out.println("Photo clicked but viewer didn't open, retrying...");
+                }
+            }
+            return false;
         } catch (Exception e) {
             System.out.println("Failed to open photo: " + e.getMessage());
             return false;
         }
     }
+
+
+
 
     /**
      * Clicks the Black & White conversion button
@@ -45,14 +68,32 @@ public class BlackWhiteActions {
      */
     public boolean clickBlackWhiteButton() {
         try {
-            WebElement bwButton = driver.findElement(bwButtonSelector);
-            bwButton.click();
-            return true;
+            WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
+            WebElement bwButton = wait.until(ExpectedConditions.elementToBeClickable(bwButtonSelector));
+
+            // Retry clicking if the element goes stale
+            for (int attempt = 0; attempt < 3; attempt++) {
+                try {
+                    bwButton.click();
+                    System.out.println("B/W button clicked successfully.");
+                    return true;
+                } catch (StaleElementReferenceException e) {
+                    System.out.println("B/W button went stale, retrying...");
+                    bwButton = wait.until(ExpectedConditions.elementToBeClickable(bwButtonSelector));
+                } catch (ElementClickInterceptedException e) {
+                    System.out.println("B/W button was blocked, retrying...");
+                    Thread.sleep(500); // Wait and retry
+                    bwButton.click();
+                }
+            }
+            return false;
         } catch (Exception e) {
             System.out.println("Failed to click B/W button: " + e.getMessage());
             return false;
         }
     }
+
+
 
     /**
      * Handles any alert that might appear after clicking the B/W button
@@ -86,38 +127,42 @@ public class BlackWhiteActions {
      * @return the new window handle if one was opened, null otherwise
      */
     public String waitForConversionAndSwitchToNewWindow(int waitTimeInSeconds) {
-        // Store original window handle
         String originalWindow = driver.getWindowHandle();
+        Set<String> oldWindows = driver.getWindowHandles();
 
-        // Wait for the conversion process to complete
-        System.out.println("Waiting for black and white conversion to complete...");
+        System.out.println("Waiting for conversion...");
         try {
             Thread.sleep(waitTimeInSeconds * 1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
-        // Check if a new window/tab has opened
-        Set<String> windowHandles = driver.getWindowHandles();
-        System.out.println("Window count after waiting: " + windowHandles.size());
-
-        // If there are multiple windows, switch to the new one
-        if (windowHandles.size() > 1) {
-            System.out.println("New window detected! Switching to it...");
-
-            // Switch to the new window (not the original one)
-            for (String windowHandle : windowHandles) {
-                if (!windowHandle.equals(originalWindow)) {
-                    driver.switchTo().window(windowHandle);
-                    System.out.println("Switched to new window: " + windowHandle);
-                    return windowHandle;
-                }
-            }
+        // Wait for a new window to appear
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        try {
+            wait.until(d -> driver.getWindowHandles().size() > oldWindows.size());
+        } catch (TimeoutException e) {
+            System.out.println("New window did not open in time.");
+            return null;
         }
 
-        System.out.println("No new window opened after waiting.");
-        return null;
+        // Get all windows and find the new one
+        Set<String> newWindows = driver.getWindowHandles();
+        newWindows.removeAll(oldWindows);
+
+        if (newWindows.isEmpty()) {
+            System.out.println("No new window detected.");
+            return null;
+        }
+
+        // Switch to the new window
+        String newWindowHandle = newWindows.iterator().next();
+        driver.switchTo().window(newWindowHandle);
+        System.out.println("Switched to new window: " + newWindowHandle);
+        return newWindowHandle;
     }
+
+
 
     /**
      * Checks if the current window contains a Black & White image heading
