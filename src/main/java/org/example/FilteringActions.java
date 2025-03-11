@@ -18,40 +18,40 @@ public class FilteringActions {
     private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
 
     // Locators
-    private By expandSearchBy = By.cssSelector("button.p-expand-search.v-btn[title='Expand Search']");
+    private By expandSearchBy = By.xpath("//button[@title='Expand Search']");
 
-    private By filterCountryBy = By.className("p-countries-select");
-    private By israelOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='Israel']");
-    private By germanyOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='Germany']");
+    private By filterCountryBy = By.xpath("//div[contains(@class, 'v-select') and contains(@class, 'input-countries')]");
+    private By franceOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='France']");
 
-    private By photoListBy = By.cssSelector("div.result.card.is-photo");
 
-    private By filterYearBy = By.className("p-year-select");
-    private By option2018By = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='2018']");
-    private By option2023By = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='2023']");
-    private By option2024By = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='2024']");
+    private By photoListBy = By.cssSelector("div.media.result.is-photo");
+
+    By filterYearBy = By.xpath("//div[contains(@class, 'p-year-select')]");
+    By option2013By = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='2013']");
+    By option2015By = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='2015']");
+
 
     private By filterCategoryBy = By.className("p-category-select");
-    private By animalOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='Animal']");
+    private By animalOptionBy =By.xpath("//div[contains(@class, 'v-list-item-title') and text()='Animal']");
     private By natureOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='Nature']");
 
     private By filterColorBy = By.className("p-color-select");
-    private By redOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='Red']");
-    private By greenOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='Green']");
+    private By redOptionBy =By.xpath("//div[contains(@class, 'v-list-item-title') and text()='Red']");
+    private By greenOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='Green']");
 
-    private By filterMonthBy = By.className("p-month-select");
-    private By januaryOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='January']");
-    private By februaryOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='february']");
-    private By marchOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='March']");
-    private By aprilOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='April']");
-    private By mayOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='May']");
-    private By juneOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='June']");
-    private By julyOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='July']");
-    private By augustOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='August']");
-    private By septemberOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='September']");
-    private By octoberOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='October']");
-    private By novemberOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='November']");
-    private By decemberOptionBy = By.xpath("//div[contains(@class, 'v-list__tile__title') and text()='December']");
+    private By filterMonthBy=By.className("p-month-select");
+    private By januaryOptionBy=By.xpath("//div[contains(@class, 'v-list-item-title') and text()='January']");
+    private By februaryOptionBy=By.xpath("//div[contains(@class, 'v-list-item-title') and text()='February']");
+    private By marchOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='March']");
+    private By aprilOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title) and text()='April']");
+    private By mayOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='May']");
+    private By juneOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='June']");
+    private By julyOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='July']");
+    private By augustOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='August']");
+    private By septemberOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='September']");
+    private By octoberOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='October']");
+    private By novemberOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='November']");
+    private By decemberOptionBy = By.xpath("//div[contains(@class, 'v-list-item-title') and text()='December']");
 
 
 
@@ -92,9 +92,7 @@ public class FilteringActions {
 
         // Initialize the country options map
         Map<String, By> countryOptions = new HashMap<>();
-        countryOptions.put("Israel", israelOptionBy);
-        countryOptions.put("Germany", germanyOptionBy);
-
+        countryOptions.put("France", franceOptionBy);
 
         // Get the locator for the selected country
         By countryLocator = countryOptions.get(country);
@@ -116,9 +114,9 @@ public class FilteringActions {
 
         // Initialize the year options map
         Map<Integer, By> yearOptions = new HashMap<>();
-        yearOptions.put(2018, option2018By);
-        yearOptions.put(2019, option2023By);
-        yearOptions.put(2020, option2024By);
+        yearOptions.put(2013, option2013By);
+        yearOptions.put(2015, option2015By);
+
 
 
         // Get the locator for the selected year

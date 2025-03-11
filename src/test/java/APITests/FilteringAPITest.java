@@ -19,25 +19,14 @@ public class FilteringAPITest {
     private final String PASSWORD = "photoprism";
 
     // Photo IDs as constants
-    private static final String ID_ISRAEL_PHOTO1 = "psosjpp23nehtzzg";
-    private static final String ID_ISRAEL_PHOTO2 = "psosj3v4cr54jghq";
-    private static final String ID_ISRAEL_PHOTO3 = "psosj2h801jykn1a";
-
-
-    private static final String ID_FRANCE_PHOTO = "pssi8b6xosk1bbdn";
-
-
-    private static final String ID_2023_PHOTO1 = "psot6983kk32dc26";
-    private static final String ID_2023_PHOTO2 = "psosjpp23nehtzzg";
-
-    private static final String ID_NATURE_PHOTO ="psot5cs97506oo7c";
+    private static final String ID_FRANCE_PHOTO1= "pssi8b6xosk1bbdn";
+    private static final String ID_FRANCE_PHOTO2 = "psszauvnlzib91l5";
+    private static final String ID_2015_PHOTO1 = "pssi8b6xosk1bbdn";
+    private static final String ID_2015_PHOTO2 = "psszauvnlzib91l5";
+    private static final String ID_2015_PHOTO3= "psszc342djfc2nrq";
+    private static final String ID_ANIMAL_PHOTO ="pssi8lus4jl1yeal";
     private static final String ID_RED_PHOTO = "pssi68spcmhbimna";
-
-    private static final String ID_OCTOBER_PHOTO1 = "psot5vm3qxk3f5a1";
-    private static final String ID_OCTOBER_PHOTO2 = "psosuc52rcs4fwep";
-
-    private static final String ID_GERMANY2018_PHOTO1 ="psot5vm3qxk3f5a1";
-    private static final String ID_GERMANY2018_PHOTO2 = "psot5cs97506oo7c";
+    private static final String ID_France2015_PHOTO1 ="pssi8b6xosk1bbdn";
 
 
 
@@ -93,53 +82,54 @@ public class FilteringAPITest {
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("$", hasSize(1)) // Verify that exactly three photos are returned
-                .body("UID", hasItems(ID_FRANCE_PHOTO)); // Verify all UIDs match
+                .body("$", hasSize(2)) // Verify that exactly three photos are returned
+                .body("UID", hasItems(ID_FRANCE_PHOTO1,ID_FRANCE_PHOTO2)); // Verify all UIDs match
     }
 
-    /*
+
     @Test
-    public void testFilterPhotosByYear2023() {
-        filterPhotosParams("", 2023, 0, "","")
+    public void testFilterPhotosByYear2015() {
+        filterPhotosParams("", 2015, 0, "","")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("$", hasSize(2)) // Verify that exactly two photos are returned
-                .body("UID", hasItems(ID_2023_PHOTO1, ID_2023_PHOTO2)); // Verify both UIDs match
+                .body("$", hasSize(3)) // Verify that exactly two photos are returned
+                .body("UID", hasItems(ID_2015_PHOTO1,ID_2015_PHOTO2,ID_2015_PHOTO3)); // Verify both UIDs match
     }
 
     @Test
-    public void testFilterPhotosByCategoryNature() {
-        filterPhotosParams("", 0, 0, "nature","")
+    public void testFilterPhotosByCategoryAnimal() {
+        filterPhotosParams("", 0, 0, "animal","")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("$", hasSize(1)) // Verify that exactly one photo is returned
-                .body("UID[0]", equalTo(ID_NATURE_PHOTO)); // Verify the UID matches
+                .body("UID[0]", equalTo(ID_ANIMAL_PHOTO)); // Verify the UID matches
     }
 
 
 
     @Test
-    public void testFilterPhotosByMonthOctober() {
-        filterPhotosParams("", 0, 10, "","")
+    public void testFilterPhotosByMonthJanuary() {
+        filterPhotosParams("", 0, 1, "","")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
-                .body("$", hasSize(2)) // Verify that exactly one photo is returned
-                .body("UID", hasItems(ID_OCTOBER_PHOTO1, ID_OCTOBER_PHOTO2)); // Verify both UIDs match
+                .body("$", hasSize(0)); // Verify that no photo is returned
+
     }
+
+
     @Test
-    public void testFilterPhotosByCountryGermanyAndYear2018() {
-        filterPhotosParams("de", 2018, 0, "","")
+    public void testFilterPhotosByCountryFranceAndYear2015() {
+        filterPhotosParams("fr", 2015, 0, "","")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("$", hasSize(2)) // Verify that exactly one photo is returned
-                .body("UID", hasItems(ID_GERMANY2018_PHOTO1, ID_GERMANY2018_PHOTO2)); // Verify both UIDs match
+                .body("UID", hasItems(ID_France2015_PHOTO1,ID_FRANCE_PHOTO2)); // Verify both UIDs match
     }
 
 
-*/
 }
 

@@ -1,4 +1,4 @@
-/*
+
 package UITests;
 
 import org.example.*;
@@ -24,31 +24,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FilteringTest
 {
     WebDriver driver;
-    //private static final String baseURL = "http://localhost:2342";
-    private static final String baseURL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
+    private static final String baseURL = "http://localhost:2342";
+    //private static final String baseURL = "https://6508-2a06-c701-9dff-a900-5819-9ec9-5fbe-58bc.ngrok-free.app";
     private LoginPage login;
     private HomePage homePage;
 
     private final String USERNAME = "Admin";
-    private final String PASSWORD = "yourpassword";
+    private final String PASSWORD = "photoprism";
 
 
     // Photo IDs as constants
-    private static final String ID_ISRAEL_PHOTO1 = "psosj2h801jykn1a";
-    private static final String ID_ISRAEL_PHOTO2 = "psosj3v4cr54jghq";
-    private static final String ID_ISRAEL_PHOTO3 = "psosjpp23nehtzzg";
-
-    private static final String ID_2018_PHOTO1 = "psot5cs97506oo7c";
-    private static final String ID_2018_PHOTO2 = "psot5vm3qxk3f5a1";
-
-    private static final String ID_ANIMAL_PHOTO1 ="psosjn9t5iu3hpdt";
-    private static final String ID_ANIMAL_PHOTO2 = "psosjpp23nehtzzg";
-    private static final String ID_ANIMAL_PHOTO3 = "psosoy75flwtf358";
-
-    private static final String ID_RED_PHOTO = "psospby5uudwhqz2";
-
-    private static final String ID_OCTOBER_PHOTO1 = "psosuc52rcs4fwep";
-    private static final String ID_OCTOBER_PHOTO2 = "psot5vm3qxk3f5a1";
+    private static final String ID_FRANCE_PHOTO1= "pssi8b6xosk1bbdn";
+    private static final String ID_FRANCE_PHOTO2 = "psszauvnlzib91l5";
+    private static final String ID_2015_PHOTO1 = "pssi8b6xosk1bbdn";
+    private static final String ID_2015_PHOTO2 = "psszauvnlzib91l5";
+    private static final String ID_2015_PHOTO3= "psszc342djfc2nrq";
+    private static final String ID_ANIMAL_PHOTO ="pssi8lus4jl1yeal";
+    private static final String ID_RED_PHOTO = "pssi68spcmhbimna";
+    private static final String ID_FEBRUARY_PHOTO = "psszc342djfc2nrq";
 
 
 
@@ -78,7 +71,22 @@ public class FilteringTest
     @Test
     public void testFilterByCountry()
     {
-        List<WebElement> photoList = homePage.getFilteringActions().filterByCountry("Israel");
+        List<WebElement> photoList = homePage.getFilteringActions().filterByCountry("France");
+        assertEquals(photoList.size(), 2);
+        List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
+
+        String idOfPhoto1 = sortedPhotoList.get(0);
+        String idOfPhoto2 = sortedPhotoList.get(1);
+
+
+        assertEquals(idOfPhoto1, ID_FRANCE_PHOTO1);
+        assertEquals(idOfPhoto2, ID_FRANCE_PHOTO2);
+
+    }
+
+    @Test
+    public void testFilterByYear() {
+        List<WebElement> photoList = homePage.getFilteringActions().filterByYear(2015);
         assertEquals(photoList.size(), 3);
         List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
@@ -86,24 +94,9 @@ public class FilteringTest
         String idOfPhoto2 = sortedPhotoList.get(1);
         String idOfPhoto3 = sortedPhotoList.get(2);
 
-        assertEquals(idOfPhoto1, ID_ISRAEL_PHOTO1);
-        assertEquals(idOfPhoto2, ID_ISRAEL_PHOTO2);
-        assertEquals(idOfPhoto3, ID_ISRAEL_PHOTO3);
-    }
-
-
-
-    @Test
-    public void testFilterByYear() {
-        List<WebElement> photoList = homePage.getFilteringActions().filterByYear(2018);
-        assertEquals(photoList.size(), 2);
-        List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
-
-        String idOfPhoto1 = sortedPhotoList.get(0);
-        String idOfPhoto2 = sortedPhotoList.get(1);
-
-        assertEquals(idOfPhoto1, ID_2018_PHOTO1);
-        assertEquals(idOfPhoto2, ID_2018_PHOTO2);
+        assertEquals(idOfPhoto1, ID_2015_PHOTO1);
+        assertEquals(idOfPhoto2, ID_2015_PHOTO2);
+        assertEquals(idOfPhoto3, ID_2015_PHOTO3);
     }
 
 
@@ -111,16 +104,12 @@ public class FilteringTest
     public void testFilterByCategory()
     {
         List<WebElement> photoList = homePage.getFilteringActions().filterByCategory("animal");
-        assertEquals(photoList.size(), 3);
+        assertEquals(photoList.size(), 1);
         List<String> sortedPhotoList = PhotoCollectionUtils.sortIDs(photoList); // Sort IDs to ensure consistent order
 
         String idOfPhoto1 = sortedPhotoList.get(0);
-        String idOfPhoto2 = sortedPhotoList.get(1);
-        String idOfPhoto3 = sortedPhotoList.get(2);
+        assertEquals(idOfPhoto1, ID_ANIMAL_PHOTO);
 
-        assertEquals(idOfPhoto1, ID_ANIMAL_PHOTO1);
-        assertEquals(idOfPhoto2, ID_ANIMAL_PHOTO2);
-        assertEquals(idOfPhoto3, ID_ANIMAL_PHOTO3);
     }
 
 
@@ -141,15 +130,13 @@ public class FilteringTest
     @Test
     public void testFilterByMonth()
     {
-        List<WebElement> photoList=homePage.getFilteringActions().filterByMonth(10);
-        assertEquals(photoList.size(),2);
+        List<WebElement> photoList=homePage.getFilteringActions().filterByMonth(2);
+        assertEquals(photoList.size(),1);
         List<String> sortedPhotoList=PhotoCollectionUtils.sortIDs(photoList);  // Sort IDs to ensure consistent order
 
         String idOfPhoto1=sortedPhotoList.get(0);
-        String idOfPhoto2=sortedPhotoList.get(1);
+        assertEquals(idOfPhoto1,ID_FEBRUARY_PHOTO);
 
-        assertEquals(idOfPhoto1,ID_OCTOBER_PHOTO1);
-        assertEquals(idOfPhoto2,ID_OCTOBER_PHOTO2);
 
 
     }
@@ -162,4 +149,5 @@ public class FilteringTest
     }
 }
 
- */
+
+

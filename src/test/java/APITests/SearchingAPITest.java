@@ -18,10 +18,11 @@ public class SearchingAPITest {
     private  final String PASSWORD = "photoprism";
 
     // Photo IDs as constants
-    private static final String ID_CAT_PHOTO1 = "pssi8lus4jl1yeal";
-    private static final String ID_CAT_PHOTO2 = "psosjpp23nehtzzg";
-    private static final String ID_DOG_PHOTO = "psscywxs6h49ti6g";
-    private static final String ID_CAR_PHOTO = "psrztanbiu6psldm";
+    private static final String ID_CAT_PHOTO = "pssi8lus4jl1yeal";
+    private static final String ID_SEA_PHOTO = "pssi8b6xosk1bbdn";
+    private static final String ID_BLUE_PHOTO = "psszc342djfc2nrq";
+
+
 
 
     @BeforeEach
@@ -65,34 +66,20 @@ public class SearchingAPITest {
                 .get("/api/v1/photos");
     }
 
-    /*
-    @Test
-    public void testSearchPhotosByCatKeyword()
-    {
-        searchPhotosParams("cat")
-                .then()
-                .statusCode(200)
-                .contentType(ContentType.JSON)
-                .body("$", hasSize(2)) // Verify that exactly two photos are returned
-                .body("UID", hasItems(ID_CAT_PHOTO1, ID_CAT_PHOTO2 )) ;// Verify both UIDs are present
-    }
-
-     */
 
 
-    /*
     @Test
     public void testSearchPhotosByTwoKeywords()
     {
-        searchPhotosParams("car dog")
+        searchPhotosParams("blue sea")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("$", hasSize(2)) // Verify that exactly two photos are returned
-                .body("UID", hasItems(ID_DOG_PHOTO, ID_CAR_PHOTO)) ;// Verify both UIDs are present
+                .body("UID", hasItems(ID_SEA_PHOTO,ID_BLUE_PHOTO)) ;// Verify both UIDs are present
     }
 
-     */
+
 
     @Test
     public void testSearchPhotosByCatKeyword()
@@ -102,7 +89,7 @@ public class SearchingAPITest {
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("$", hasSize(1)) // Verify that exactly two photos are returned
-                .body("UID", hasItems(ID_CAT_PHOTO1)) ;// Verify both UIDs are present
+                .body("UID", hasItems(ID_CAT_PHOTO)) ;// Verify both UIDs are present
     }
 
     @Test
